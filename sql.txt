@@ -1,0 +1,118 @@
+index.php regel 27
+
+$sql = "SELECT * FROM tblCategorie";
+$resultaat = mysql_query(mysql_real_escape_string($sql));
+
+
+Categorie.php regel 27
+
+$sql = 	"SELECT * " .
+	"FROM tblArtikel " .
+	"INNER JOIN tblCategorieArtikel " .
+	"ON tblArtikel.artikelID = tblCategorieArtikel.artikelID " .
+	"WHERE tblCategorieArtikel.categorieID = " . $_GET["categorieID"] . " " .
+	"ORDER BY tblArtikel.artikelID";
+$resultaat = mysql_query(mysql_real_escape_string($sql));
+
+
+Artikel.php regel 26
+
+$sql = 	"SELECT * " .
+        "FROM tblArtikel " .
+        "WHERE artikelID = " . $_GET["artikelID"];
+$resultaat = mysql_query(mysql_real_escape_string($sql));
+
+
+winkelmandje.php regel 59
+
+$sql = "SELECT artikelID, naam, afbeelding, aantal, prijs FROM tblArtikel WHERE artikelID = " . $_GET["artikelID"];
+$artikelen = mysql_query(mysql_real_escape_string($sql));
+
+
+Account.php 
+regel 26
+
+$sql = "SELECT * FROM tblKlant WHERE klantID = " . $_GET["klantID"];
+$resultaat = mysql_query(mysql_real_escape_string($sql));
+
+regel 114
+
+$sql =  "SELECT * " .
+        "FROM tblBestelling " .
+        "WHERE klantID =" . $_GET["klantID"];
+$bestellingen = mysql_query(mysql_real_escape_string($sql));
+
+regel 145
+
+$sql =  "SELECT * " .
+        "FROM tblOrderregel " .
+        "JOIN tblArtikel " .
+        "ON tblArtikel.artikelID = tblOrderregel.artikelID " .
+        "WHERE tblOrderregel.bestellingID =" . $rij["bestellingID"];
+$orderregels = mysql_query(mysql_real_escape_string($sql));
+
+
+catMenu.php regel 6
+
+$sql = "SELECT * FROM tblCategorie";
+$resultaat = mysql_query(mysql_real_escape_string($sql));
+
+
+
+
+
+lib.php regel 24 (inlogfunctie)
+
+$sql =  "SELECT klantID, wachtwoord " .
+	"FROM tblKlant " .
+	"WHERE email = '" . $email . "'";
+$resultaat = mysql_query($sql);
+
+
+zoekresultaat.php
+
+regel 25
+$sql = 	"SELECT * from tblArtikel " .
+	"WHERE tblArtikel.naam LIKE '%" . $_GET["txtZoek"] . "%' " .
+	"OR tblArtikel.omschrijving LIKE '%" . $_GET["txtZoek"] . "%' " .
+	"OR tblArtikel.zoektermen LIKE '%" . $_GET["txtZoek"] . "%' ";
+$resultaat = mysql_query($sql);
+
+regel 52
+$sql = 	"SELECT tblCategorie.categorieID, naam FROM tblCategorie " .
+	"JOIN tblCategorieArtikel " .
+	"ON tblCategorieArtikel.categorieID = tblCategorie.categorieID " .
+	"WHERE artikelID = '" . $rij["artikelID"] . "'";
+$categorie = mysql_query($sql);
+
+
+wijzigen.php 
+
+regel 120
+
+$sql = 	"UPDATE tblKlant " .
+ 	"SET voornaam = '" . $voornaam . "', tussenvoegsel = '" . $tussenvoegsel . "',  achternaam = '" . $achternaam . "', geslacht = '" . $geslacht . "', adres = '" . $adres . "', postcode = '" . $postcode . "', plaats = '". $plaats . "', email = '" . $email . "', wachtwoord = '" . $wachtwoord . "', telefoon = '" . $telefoon . "', nieuwsbrief = '" . $nieuwsbrief . "', geboortedatum = '" . $mysqlDatum . "' " .
+ 	"WHERE klantID = '" . $klantid . "'";
+if (!mysql_query($sql)) {
+
+regel 138
+
+$sql = "SELECT * FROM tblKlant WHERE klantID = " . $klantid;
+$resultaat = mysql_query(mysql_real_escape_string($sql));
+
+
+registreren.php
+
+regel 59
+
+$sql = 	"SELECT * ".
+ 	"FROM tblKlant ".
+ 	"WHERE email = '" . $_POST["txtEmail"] . "'";
+$resultaat = mysql_query($sql);
+
+regel 101
+
+$sql = "INSERT INTO tblKlant 
+	(voornaam, tussenvoegsel, achternaam, geslacht, adres, postcode, plaats, email, wachtwoord, telefoon, nieuwsbrief, geboortedatum , aanmelddatum) 
+	VALUES ('" . $_POST["txtVoornaam"] . "' , '" . $_POST["txtTussenvoegsel"] . "'  , '" . $_POST["txtAchternaam"] . "' , '" . $_POST["blnGeslacht"] . "' , '" . $_POST["txtAdres"] . "' , '" . $_POST["txtPostcode"] . "' , '" . $_POST["txtPlaats"] . "' , '" . $_POST["txtEmail"] . "' , '" . $_POST["txtWachtwoord"] . "' , '" . $_POST["txtTelefoon"] . "' , '" . $_POST["txtNieuwsbrief"] . "' ,'" . $mysqlDatum . "', '" . $datAanmelddatum . "')";
+if (!mysql_query($sql)) {
